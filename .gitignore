@@ -102,3 +102,21 @@ dist
 
 # TernJS port file
 .tern-port
+products.bff/bin/Debug/net5.0/appsettings.Development.json
+products.bff/bin/
+products.bff/obj/
+TestingMoq/DataAccess/bin/
+TestingMoq/DataAccess/obj/DataAccess.csproj.nuget.dgspec.json
+TestingMoq/DataAccess/obj/DataAccess.csproj.nuget.g.props
+TestingMoq/DataAccess/obj/
+TestingMoq/Entities/bin/
+TestingMoq/Entities/obj/
+TestingMoq/Services/bin/
+TestingMoq/Services/obj/
+TestingMoq/TestingMoq/bin/
+TestingMoq/TestingMoq/obj/
+TestingMoq/WebApi/bin/
+TestingMoq/WebApi/obj/project.assets.json
+TestingMoq/WebApi/obj/
+TestingMoq/XUnitTestProject/bin/
+TestingMoq/XUnitTestProject/obj/
