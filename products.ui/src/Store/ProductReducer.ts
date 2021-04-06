@@ -12,7 +12,7 @@ export const initialState: GlobalState = {
 
 type ProductsActions = { type: "FETCH_PRODUCTS_ACTION", payload: GlobalState}
 
-export const ProductReducer = (state: GlobalState, action: ProductsActions) => {
+export const ProductReducer = (state: GlobalState = initialState, action: ProductsActions) => {
   switch(action.type){
     case "FETCH_PRODUCTS_ACTION":
       return {...state}
