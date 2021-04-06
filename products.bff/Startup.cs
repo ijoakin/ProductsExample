@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.Net.Http.Headers;
 
 namespace products.bff
 {
@@ -22,6 +23,7 @@ namespace products.bff
         }
 
         public IConfiguration Configuration { get; }
+        private const string LocalCORSPolicy = "LocalCORSPolicy";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,6 +34,17 @@ namespace products.bff
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "products.bff", Version = "v1" });
             });
+
+            services.AddCors(options =>
+                {
+                    options.AddPolicy(name: LocalCORSPolicy,
+                        builder =>
+                        {
+                            builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost")
+                                .AllowAnyMethod()
+                                .WithHeaders(HeaderNames.ContentType);
+                        });
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +62,12 @@ namespace products.bff
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseCors(builder => {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });
 
             app.UseEndpoints(endpoints =>
             {

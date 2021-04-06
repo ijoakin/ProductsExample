@@ -9,15 +9,14 @@ export function ProductComponent(props: ProductProps) {
   const [productValue, setValue] = useState(initialValue);
 
   useEffect(() => {
-    if (productValue.values.length === 0) {
-      const vals = getProducts();
-      setValue(vals);
-    }
-  }, [productValue.values]);
+    getProducts().then((reponse) => {
+      setValue(reponse);
+    });
+  }, []);
 
   return (
     <div className="table-responsive">
-      <span>Cantidad de productos: {productValue.values.length}</span>
+      <span>Cantidad de productos: {productValue.length}</span>
       <table className="table">
         <thead>
           <tr>
@@ -27,13 +26,15 @@ export function ProductComponent(props: ProductProps) {
           </tr>
         </thead>
         <tbody>
-          {productValue.map((p: Product) => (
-            <tr key={p.id}>
-              <td>{p.id}</td>
-              <td>{p.description}</td>
-              <td>{p.price}</td>
-            </tr>
-          ))}
+          {productValue
+            ? productValue.map((p: Product) => (
+                <tr key={p.id}>
+                  <td>{p.id}</td>
+                  <td>{p.description}</td>
+                  <td>{p.price}</td>
+                </tr>
+              ))
+            : ""}
         </tbody>
       </table>
     </div>
